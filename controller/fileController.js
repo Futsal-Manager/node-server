@@ -16,6 +16,13 @@ class FileController {
     static parseForm(req) {
         return fileService_1.default.parse(req);
     }
+    static s3URLsave(username, s3url) {
+        return fileService_1.default.save(username, s3url);
+    }
+    static getList(req) {
+        let username = req.user.username;
+        return fileService_1.default.retrieveList(username);
+    }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = FileController;

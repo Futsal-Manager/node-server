@@ -9,7 +9,6 @@ import {Document, model, Model, Schema} from 'mongoose';
 
 /** Internal dependencies **/
 
-
 let UserSchema: Schema = new Schema({
     username: {
         type: String,
@@ -33,4 +32,21 @@ interface IUser extends Document {
     data: any[];
 }
 
+let FileSchema: Schema = new Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    s3url: {
+        type: String,
+        required: true,
+    },
+});
+
+interface IFile extends Document {
+    username: string,
+    s3url: string
+}
+
 export let UserModel: Model<IUser> = model<IUser>('User', UserSchema);
+export let FileModel: Model<IFile> = model<IFile>('File', FileSchema);

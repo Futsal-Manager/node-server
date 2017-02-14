@@ -21,4 +21,15 @@ let UserSchema = new mongoose_1.Schema({
     friends: [String],
     data: [mongoose_1.Schema.Types.Mixed]
 });
+let FileSchema = new mongoose_1.Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    s3url: {
+        type: String,
+        required: true,
+    },
+});
 exports.UserModel = mongoose_1.model('User', UserSchema);
+exports.FileModel = mongoose_1.model('File', FileSchema);

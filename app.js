@@ -14,7 +14,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 /** Mongoose Config **/
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/boilerplate');
+mongoose.connect('mongodb://localhost/futsalmanager');
 const passport = require("passport");
 const session = require("express-session");
 let FacebookStrategy = require('passport-facebook').Strategy;

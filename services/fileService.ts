@@ -16,11 +16,9 @@ form.keepExtensions = true;
 form.maxFieldsSize = 2 * 1024 * 1024; //default;
 form.maxFields = 1000;
 
-
-
-
 /** Internal dependencies **/
 import CONFIG from './../config';
+import {FileModel} from './dbModel';
 
 
 /** CONFIGURATION ***/
@@ -65,6 +63,27 @@ export default class UserService {
                 } else{
                     resolve(files);
                 }
+            });
+        })
+    }
+
+    static save(username, s3url) {
+        return new Promise((resolve, reject) => {
+            let fileInstance = new FileModel({username: username, s3url: s3url});
+            fileInstance.save().then(() => {
+                resolve(s3url);
+            }).catch((err) => {
+                reject(err);
+            })
+        });
+    }
+
+    static retrieveList(username) {
+        return new Promise((resolve, reject) => {
+            FileModel.find({username: username}, {_id: false, username: false, __v: false}).then((files) => {
+                resolve(files);
+            }).catch((err) => {
+                reject(err);
             });
         })
     }

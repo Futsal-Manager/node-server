@@ -19,13 +19,18 @@ let router = express.Router();
 
 router.get('/', MainRouter);
 
-// User CRUD Logic
+/******************************************************************************************
+ * USER CRUD Logic (Only Dev Test)
+ ******************************************************************************************/
+router.get('/auth/signup', UserRouter.signupPage);
 router.post('/auth/signup', UserRouter.create);
-router.get('/user/:id', UserRouter.read); // Todo: Only dev test
-router.put('/user/:id', UserRouter.update);
-router.delete('/user/:id', UserRouter.delete); // Todo: Only dev test
+router.get('/user/:id', AuthMiddleware.userAuthenticated, UserRouter.read); // Todo: Only dev test
+router.put('/user/:id', AuthMiddleware.userAuthenticated, UserRouter.update);
+router.delete('/user/:id', AuthMiddleware.userAuthenticated, UserRouter.delete); // Todo: Only dev test
 
-// Auth Router
+/******************************************************************************************
+ * Local Strategy Auth Logic
+ ******************************************************************************************/
 router.get('/auth/login', AuthRouter.login); // send facebook auth link
 router.get('/auth/success', AuthMiddleware.userAuthenticated, AuthRouter.success); // success redirect for facebook auth
 router.get('/auth/fail', AuthRouter.fail);
@@ -36,16 +41,21 @@ router.post('/auth/login', // local auth router
         failureFlash: false })
 );
 
-// Facebook CRUD Logic
+/******************************************************************************************
+ * Facebook Auth Logic
+ ******************************************************************************************/
 router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/auth/success',
         failureRedirect: '/auth/fail' }));
 
-// File Upload Logic
-router.get('/file', FileRouter.uploadPage);
-router.post('/file', FileRouter.upload);
+/******************************************************************************************
+ * File Upload and Read Logic
+ ******************************************************************************************/
+router.get('/file/upload', AuthMiddleware.userAuthenticated, FileRouter.uploadPage);
+router.post('/file', AuthMiddleware.userAuthenticated, FileRouter.upload);
+router.get('/file', AuthMiddleware.userAuthenticated, FileRouter.list);
 
 
 export default router;

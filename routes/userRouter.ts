@@ -44,6 +44,9 @@ const UserRouter = {
             res.status(500).json({errmsg: err.errmsg});
         });
     },
+    signupPage(req, res) {
+        res.sendFile('signup.html', {root: __dirname +'/../public/html'});
+    }
 };
 
 export default UserRouter;

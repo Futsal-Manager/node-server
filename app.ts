@@ -15,7 +15,7 @@ let mongoose = require('mongoose');
 
 /** Mongoose Config **/
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/boilerplate');
+mongoose.connect('mongodb://localhost/futsalmanager');
 
 import * as passport from 'passport';
 import * as session from 'express-session';
