@@ -17,8 +17,7 @@ class FileRouter {
         }).then((files) => {
             return fileController_1.default.upload(files);
         }).then((s3url) => {
-            let username = req.user.username;
-            return fileController_1.default.s3URLsave(username, s3url);
+            return fileController_1.default.s3URLsave(req, s3url);
         }).then((url) => {
             res.status(200).json({ s3url: url });
         }).catch((err) => {

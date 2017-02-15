@@ -23,7 +23,8 @@ export default class FileController {
         return FileService.parse(req);
     }
 
-    static s3URLsave(username, s3url) {
+    static s3URLsave(req, s3url) {
+        let username = req.user.username;
         return FileService.save(username, s3url);
     }
 

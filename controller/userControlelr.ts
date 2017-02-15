@@ -15,20 +15,26 @@ export default class UserController {
 
     }
 
-    static createUser(username, password) {
+    static createUser(req) {
+        let username = req.body.username;
+        let password = req.body.password;
         return UserService.createUser(username, password);
     }
 
-    static readUser(id) {
-        return UserService.readUser(id);
+    static readUser(req) {
+        let userID = req.params.id;
+        return UserService.readUser(userID);
     }
 
-    static updateUser(userID, user) {
+    static updateUser(req) {
+        let userID = req.params.id;
+        let user = req.body;
         return UserService.updateUser(userID, user);
     }
 
-    static deleteUser(id) {
-        return UserService.deleteUser(id);
+    static deleteUser(req) {
+        let userID = req.params.id;
+        return UserService.deleteUser(userID);
     }
 
 }

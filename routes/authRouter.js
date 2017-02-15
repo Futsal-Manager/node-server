@@ -3,19 +3,22 @@
  */
 "use strict";
 const path = require('path');
-const AuthRouter = {
-    login(req, res) {
+class AuthRouter {
+    constructor() {
+    }
+    static login(req, res) {
         if (req.user)
             return res.redirect('/auth/success');
         res.sendFile('login.html', { root: __dirname + '/../public/html' });
-    },
-    success(req, res) {
+    }
+    static success(req, res) {
         let user = req.user;
         res.status(200).json({ msg: 'success login with ' + user.username });
-    },
-    fail(req, res) {
+    }
+    static fail(req, res) {
         res.status(200).json({ msg: 'fail login' });
     }
-};
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AuthRouter;
+;

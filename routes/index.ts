@@ -17,7 +17,7 @@ import FileRouter from './fileRouter';
 
 let router = express.Router();
 
-router.get('/', MainRouter);
+router.get('/', MainRouter.index);
 
 /******************************************************************************************
  * USER CRUD Logic (Only Dev Test)

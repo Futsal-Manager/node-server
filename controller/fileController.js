@@ -16,7 +16,8 @@ class FileController {
     static parseForm(req) {
         return fileService_1.default.parse(req);
     }
-    static s3URLsave(username, s3url) {
+    static s3URLsave(req, s3url) {
+        let username = req.user.username;
         return fileService_1.default.save(username, s3url);
     }
     static getList(req) {

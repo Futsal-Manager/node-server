@@ -14,7 +14,7 @@ const authRouter_1 = require("./authRouter");
 const authMiddleware_1 = require("./../middleware/authMiddleware");
 const fileRouter_1 = require("./fileRouter");
 let router = express.Router();
-router.get('/', mainRouter_1.default);
+router.get('/', mainRouter_1.default.index);
 /******************************************************************************************
  * USER CRUD Logic (Only Dev Test)
  ******************************************************************************************/

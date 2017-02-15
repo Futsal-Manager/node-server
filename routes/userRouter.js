@@ -7,44 +7,41 @@
 /** External dependencies **/
 /** Internal dependencies **/
 const userControlelr_1 = require("./../controller/userControlelr");
-const UserRouter = {
-    create(req, res) {
-        let username = req.body.username;
-        let password = req.body.password;
-        userControlelr_1.default.createUser(username, password).then(() => {
+class UserRouter {
+    constructor() {
+    }
+    static create(req, res) {
+        userControlelr_1.default.createUser(req).then(() => {
             res.status(200).json({ res: 'success' });
         }).catch((err) => {
             res.status(500).json({ errmsg: err });
         });
-    },
-    read(req, res) {
-        let userID = req.params.id;
-        userControlelr_1.default.readUser(userID).then((user) => {
+    }
+    static read(req, res) {
+        userControlelr_1.default.readUser(req).then((user) => {
             res.status(200).json({ res: user });
         }).catch((err) => {
             res.status(500).json({ errmsg: err.errmsg });
         });
-    },
-    update(req, res) {
-        let userID = req.params.id;
-        let user = req.body;
-        userControlelr_1.default.updateUser(userID, user).then((user) => {
+    }
+    static update(req, res) {
+        userControlelr_1.default.updateUser(req).then((user) => {
             res.status(200).json({ res: user });
         }).catch((err) => {
             res.status(500).json({ errmsg: err.errmsg });
         });
-    },
-    delete(req, res) {
-        let userID = req.params.id;
-        userControlelr_1.default.deleteUser(userID).then((user) => {
+    }
+    static delete(req, res) {
+        userControlelr_1.default.deleteUser(req).then((user) => {
             res.status(200).json({ res: user });
         }).catch((err) => {
             res.status(500).json({ errmsg: err.errmsg });
         });
-    },
-    signupPage(req, res) {
+    }
+    static signupPage(req, res) {
         res.sendFile('signup.html', { root: __dirname + '/../public/html' });
     }
-};
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = UserRouter;
+;

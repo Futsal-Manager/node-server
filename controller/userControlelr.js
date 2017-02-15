@@ -10,17 +10,23 @@ const userService_1 = require("./../services/userService");
 class UserController {
     constructor() {
     }
-    static createUser(username, password) {
+    static createUser(req) {
+        let username = req.body.username;
+        let password = req.body.password;
         return userService_1.default.createUser(username, password);
     }
-    static readUser(id) {
-        return userService_1.default.readUser(id);
+    static readUser(req) {
+        let userID = req.params.id;
+        return userService_1.default.readUser(userID);
     }
-    static updateUser(userID, user) {
+    static updateUser(req) {
+        let userID = req.params.id;
+        let user = req.body;
         return userService_1.default.updateUser(userID, user);
     }
-    static deleteUser(id) {
-        return userService_1.default.deleteUser(id);
+    static deleteUser(req) {
+        let userID = req.params.id;
+        return userService_1.default.deleteUser(userID);
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
