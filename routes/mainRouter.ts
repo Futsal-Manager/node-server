@@ -14,6 +14,6 @@ export default class MainRouter {
     }
 
     static index(req, res) {
-        res.status(200).json({res: 'success'});
+        res.status(200).json({res: 'Futsal Manager server'});
     }
 }
