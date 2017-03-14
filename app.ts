@@ -63,10 +63,16 @@ passport.use(new LocalStrategy(
 );
 
 passport.serializeUser(function(user, done) {
+    console.log('=============passport serializeUser===========');
+    console.log(user);
+    console.log('=============passport serializeUser===========');
     done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
+    console.log('=============passport deserializeUser===========');
+    console.log(id);
+    console.log('=============passport deserializeUser===========');
     UserService.readUser(id).then((user) => {
         done(null, user);
     }).catch((err) => {
@@ -85,7 +91,9 @@ app.set('view engine', 'jade');
 
 // header parser
 app.use(function(req, res, next){
+    console.log('=============Jeader parser start===========');
     console.log(req.headers);
+    console.log('=============Jeader parser end===========');
     next();
 })
 
