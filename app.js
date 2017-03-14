@@ -55,9 +55,15 @@ passport.use(new LocalStrategy(function (username, password, done) {
     });
 }));
 passport.serializeUser(function (user, done) {
+    console.log('=============passport serializeUser===========');
+    console.log(user);
+    console.log('=============passport serializeUser===========');
     done(null, user);
 });
 passport.deserializeUser(function (id, done) {
+    console.log('=============passport deserializeUser===========');
+    console.log(id);
+    console.log('=============passport deserializeUser===========');
     userService_1.default.readUser(id).then((user) => {
         done(null, user);
     }).catch((err) => {
@@ -71,7 +77,7 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -81,6 +87,19 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+// Headers parser
+app.use(function (req, res, next) {
+    console.log('=============Cookies parser start===========');
+    console.log(req.cookies);
+    console.log('=============Cookies parser end===========');
+    console.log('=============Headers parser start===========');
+    console.log(req.headers);
+    console.log('=============Headers parser end===========');
+    console.log('=============Body parser start===========');
+    console.log(req.body);
+    console.log('=============Body parser end===========');
+    next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));

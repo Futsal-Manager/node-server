@@ -12,7 +12,7 @@ class AuthRouter {
         res.sendFile('login.html', { root: __dirname + '/../public/html' });
     }
     static success(req, res) {
-        res.status(200).json({ msg: 'success login' });
+        res.status(200).json({ msg: 'success login', req: req.session });
     }
     static fail(req, res) {
         res.status(200).json({ msg: 'fail login' });
