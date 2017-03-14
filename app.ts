@@ -104,9 +104,15 @@ app.use(session({
 
 // Headers parser
 app.use(function(req, res, next){
+    console.log('=============Cookies parser start===========');
+    console.log(req.cookies);
+    console.log('=============Cookies parser end===========');
     console.log('=============Headers parser start===========');
     console.log(req.headers);
     console.log('=============Headers parser end===========');
+    console.log('=============Body parser start===========');
+    console.log(req.body);
+    console.log('=============Body parser end===========');
     next();
 })
 
