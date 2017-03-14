@@ -102,11 +102,11 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-// Cookies parser
+// Headers parser
 app.use(function(req, res, next){
-    console.log('=============Cookies parser start===========');
-    console.log(req.cookies);
-    console.log('=============Cookies parser end===========');
+    console.log('=============Headers parser start===========');
+    console.log(req.headers);
+    console.log('=============Headers parser end===========');
     next();
 })
 
