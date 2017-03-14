@@ -8,7 +8,7 @@ const AuthMiddleware = {
             next();
         } else {
             console.log('Auth Failed');
-            res.status(500).json({errmsg: err.errmsg});
+            res.status(500).json({errmsg: 'Auth Failed'});
         }
     }
 };
