@@ -14,7 +14,7 @@ export default class MainRouter {
     }
 
     static index(req, res) {
-        if(req.user) res.status(200).json({res: 'HI Futsal manager' + req.user.username})
-        else res.status(200).json({res: 'Futsal Manager server' + req.user.username})
+        if(req.user) res.status(200).json({res: 'HI Futsal manager', user: req.user})
+        else res.status(200).json({res: 'Futsal Manager server running'})
     }
 }
