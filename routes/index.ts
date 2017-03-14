@@ -36,7 +36,7 @@ router.get('/auth/login', AuthRouter.login); // send facebook auth link
 router.get('/auth/fail', AuthRouter.fail);
 router.post('/auth/login', // local auth router
     passport.authenticate('local',
-        {successRedirect: '/auth/success',
+        {successRedirect: '/',
         failureRedirect: '/auth/fail',
         failureFlash: false })
 );
@@ -47,7 +47,7 @@ router.post('/auth/login', // local auth router
 router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/auth/success',
+        successRedirect: '/',
         failureRedirect: '/auth/fail' }));
 
 /******************************************************************************************
