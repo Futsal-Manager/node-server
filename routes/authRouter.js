@@ -7,12 +7,14 @@ class AuthRouter {
     constructor() {
     }
     static login(req, res) {
-        if (req.user)
+        if (req.user) {
+            console.log('already logged in user', req.user);
             return res.redirect('/auth/success');
+        }
         res.sendFile('login.html', { root: __dirname + '/../public/html' });
     }
     static success(req, res) {
-        res.status(200).json({ msg: 'success login', req: req.session });
+        res.status(200).json({ msg: 'success login', reqHeaders: req.headers, cookies: req.cookies });
     }
     static fail(req, res) {
         res.status(200).json({ msg: 'fail login' });

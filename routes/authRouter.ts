@@ -10,12 +10,15 @@ export default class AuthRouter {
 
     }
     static login(req, res) {
-        if(req.user) return res.redirect('/auth/success');
+        if(req.user) {
+            console.log('already logged in user', req.user);
+            return res.redirect('/auth/success');
+        }
         res.sendFile('login.html', {root: __dirname +'/../public/html'});
     }
 
     static success(req, res) {
-        res.status(200).json({msg: 'success login', cookie: req.cookie});
+        res.status(200).json({msg: 'success login', reqHeaders: req.headers, cookies: req.cookies});
     }
 
     static fail(req, res) {
