@@ -10,7 +10,7 @@ class MainRouter {
     constructor() {
     }
     static index(req, res) {
-        res.status(200).json({ res: 'success' });
+        res.status(200).json({ res: 'Futsal Manager server' });
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });

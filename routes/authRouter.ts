@@ -17,6 +17,7 @@ export default class AuthRouter {
     static success(req, res) {
         res.status(200).json({msg: 'success login'});
     }
+
     static fail(req, res) {
         res.status(200).json({msg: 'fail login'});
     }

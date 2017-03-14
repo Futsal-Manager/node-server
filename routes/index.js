@@ -27,7 +27,7 @@ router.delete('/user/:id', authMiddleware_1.default.userAuthenticated, userRoute
  * Local Strategy Auth Logic
  ******************************************************************************************/
 router.get('/auth/login', authRouter_1.default.login); // send facebook auth link
-router.get('/auth/success', authMiddleware_1.default.userAuthenticated, authRouter_1.default.success); // success redirect for facebook auth
+router.get('/auth/success', authRouter_1.default.success); // success redirect for facebook auth
 router.get('/auth/fail', authRouter_1.default.fail);
 router.post('/auth/login', // local auth router
 passport.authenticate('local', { successRedirect: '/auth/success',
