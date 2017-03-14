@@ -82,6 +82,7 @@ passport.deserializeUser(function(id, done) {
 
 /** Internal dependencies **/
 import index from './routes/index';
+import {MemoryStore} from "express-session";
 
 let app = express();
 
