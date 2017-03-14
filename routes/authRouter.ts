@@ -15,10 +15,10 @@ export default class AuthRouter {
     }
 
     static success(req, res) {
+        res.status(200).json({msg: 'success login', cookie: req.cookies});
         console.log('==========success headers==========');
         console.log(res.headers);
         console.log('==========success headers==========');
-        res.status(200).json({msg: 'success login', cookie: req.cookies});
     }
 
     static fail(req, res) {
