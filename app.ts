@@ -83,6 +83,12 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// header parser
+app.use(function(req, res, next){
+    console.log(req.headers);
+    next();
+})
+
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
 app.use(cookieParser());
