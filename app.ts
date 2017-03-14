@@ -89,14 +89,6 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// header parser
-app.use(function(req, res, next){
-    console.log('=============Jeader parser start===========');
-    console.log(req.headers);
-    console.log('=============Jeader parser end===========');
-    next();
-})
-
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
 app.use(cookieParser());
@@ -108,6 +100,15 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
+// Session parser
+app.use(function(req, res, next){
+    console.log('=============Session parser start===========');
+    console.log(req.session);
+    console.log('=============Session parser end===========');
+    next();
+})
+
 app.use(passport.initialize());
 app.use(passport.session());
 
