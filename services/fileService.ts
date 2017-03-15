@@ -32,6 +32,7 @@ export default class UserService {
 
     static upload(files) {
         return new Promise((resolve, reject) => {
+            console.log('upload file name is' + files);
             let params = {
                 Bucket:'futsal-manager',
                 Key:files.file.name,
@@ -40,8 +41,10 @@ export default class UserService {
             };
             s3.upload(params, function(err, data){
                 var result='';
-                if(err)
+                if(err){
+                    console.log(err);
                     result = 'Fail';
+                }
                 else
                     result = data.Location;
                 resolve(result)
