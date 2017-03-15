@@ -51,13 +51,14 @@ export default class UserService {
 
     static parse(req) {
         form.on('progress', function(bytesReceived, bytesExpected) {
-            // console.log('expected' + bytesExpected);
-            // console.log('received' + bytesReceived);
+            console.log('expected' + bytesExpected);
+            console.log('received' + bytesReceived);
         });
 
         return new Promise((resolve, reject) => {
             form.parse(req, function(err, fields, files) {
                 if(err){
+                    console.log(err);
                     reject(err);
                     return;
                 } else{
