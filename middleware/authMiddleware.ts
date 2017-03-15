@@ -2,15 +2,22 @@
  * Created by yuhogyun on 2017. 2. 4..
  */
 
-const AuthMiddleware = {
-    userAuthenticated: function(req, res, next) {
+import AuthRouter from './../routes/authRouter'
+
+export default class AuthMiddleware {
+    constructor() {
+
+    }
+
+    static userAuthenticated(req, res, next) {
         if (req.user) {
             next();
         } else {
+            console.log('req', req);
+            console.log('res', res);
             console.log('Auth Failed');
-            res.status(500).json({errmsg: 'Auth Failed'});
+            AuthRouter.fail(req,res);
         }
     }
-};
 
-export default AuthMiddleware;
+}

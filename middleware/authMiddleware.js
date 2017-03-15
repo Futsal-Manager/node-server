@@ -2,16 +2,21 @@
  * Created by yuhogyun on 2017. 2. 4..
  */
 "use strict";
-const AuthMiddleware = {
-    userAuthenticated: function (req, res, next) {
+const authRouter_1 = require("./../routes/authRouter");
+class AuthMiddleware {
+    constructor() {
+    }
+    static userAuthenticated(req, res, next) {
         if (req.user) {
             next();
         }
         else {
+            console.log('req', req);
+            console.log('res', res);
             console.log('Auth Failed');
-            res.status(500).json({ errmsg: 'Auth Failed' });
+            authRouter_1.default.fail(req, res);
         }
     }
-};
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AuthMiddleware;

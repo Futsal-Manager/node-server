@@ -15,10 +15,13 @@ class FileRouter {
             return Promise.resolve(files);
             // Todo 비디오 파일 포맷인지 검증하는 작업이 필요
         }).then((files) => {
+            console.log('=========Server Parse form success');
             return fileController_1.default.upload(files);
         }).then((s3url) => {
+            console.log('=========Server upload success');
             return fileController_1.default.s3URLsave(req, s3url);
         }).then((url) => {
+            console.log('=========Server save s3url to mongo success');
             res.status(200).json({ s3url: url });
         }).catch((err) => {
             res.status(500).json({ res: err });

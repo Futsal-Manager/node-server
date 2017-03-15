@@ -19,10 +19,13 @@ export default class FileRouter {
             return Promise.resolve(files);
             // Todo 비디오 파일 포맷인지 검증하는 작업이 필요
         }).then((files) => { // 2. upload image to s3
+            console.log('=========Server Parse form success')
             return FileController.upload(files);
         }).then((s3url) => { // 3. save url and userInfo to mongoDB
+            console.log('=========Server upload success');
             return FileController.s3URLsave(req, s3url);
         }).then((url) => {
+            console.log('=========Server save s3url to mongo success');
             res.status(200).json({s3url: url});
         }).catch((err) => {
             res.status(500).json({res: err});

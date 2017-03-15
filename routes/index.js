@@ -27,20 +27,15 @@ router.delete('/user/:id', authMiddleware_1.default.userAuthenticated, userRoute
  * Local Strategy Auth Logic
  ******************************************************************************************/
 router.get('/auth/login', authRouter_1.default.login); // send facebook auth link
-router.get('/auth/success', authRouter_1.default.success); // success redirect for facebook auth
+router.get('/auth/success', authRouter_1.default.success); // Don't need to. because this route can be redirected local or facebook
 router.get('/auth/fail', authRouter_1.default.fail);
 router.post('/auth/login', // local auth router
-passport.authenticate('local', { successRedirect: '/auth/success',
-    failureRedirect: '/auth/fail',
-    failureFlash: false }));
+passport.authenticate('local'), authMiddleware_1.default.userAuthenticated, authRouter_1.default.success);
 /******************************************************************************************
  * Facebook Auth Logic
  ******************************************************************************************/
 router.get('/auth/facebook', passport.authenticate('facebook'));
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: '/auth/success',
-    failureRedirect: '/auth/fail'
-}));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fail' }, authRouter_1.default.success));
 /******************************************************************************************
  * File Upload and Read Logic
  ******************************************************************************************/

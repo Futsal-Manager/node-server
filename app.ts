@@ -32,10 +32,15 @@ import CONFIG from './config';
 passport.use(new FacebookStrategy({
       clientID: CONFIG.FACEBOOK_CLIENT_ID,
       clientSecret: CONFIG.FACEBOOK_CLIENT_SECRET,
-      callbackURL: CONFIG.FACEBOOK_REDIRECT_URL
+      callbackURL: CONFIG.FACEBOOK_REDIRECT_URL,
+      profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
+    // Todo: 페이스북 계정이 회원가입 되었는지 보고, 회원가입 안 되었으면 가입시킴, 가입이 되어 있으면 로그인시켜줌
+    console.log("========Facebook========");
     console.log(profile);
+    console.log("========Facebook========");
+    done(null, profile);
     // Todo : Facebook auth 성공시 createOrUpdate
     // UserModel.findOneAndUpdate({username: '123'})
     /*
@@ -63,16 +68,20 @@ passport.use(new LocalStrategy(
 );
 
 passport.serializeUser(function(user, done) {
+    /*
     console.log('=============passport serializeUser===========');
     console.log(user);
     console.log('=============passport serializeUser===========');
+    */
     done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
+    /*
     console.log('=============passport deserializeUser===========');
     console.log(id);
     console.log('=============passport deserializeUser===========');
+    */
     UserService.readUser(id).then((user) => {
         done(null, user);
     }).catch((err) => {
@@ -82,7 +91,6 @@ passport.deserializeUser(function(id, done) {
 
 /** Internal dependencies **/
 import index from './routes/index';
-import {MemoryStore} from "express-session";
 
 let app = express();
 
@@ -92,36 +100,37 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
-app.use(cookieParser());
+app.use(cookieParser(CONFIG.SESSION_SECRET_KEY));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: CONFIG.SESSION_SECRET_KEY,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
 }));
-
-// Headers parser
-app.use(function(req, res, next){
-    console.log('=============Cookies parser start===========');
-    console.log(req.cookies);
-    console.log('=============Cookies parser end===========');
-    console.log('=============Headers parser start===========');
-    console.log(req.headers);
-    console.log('=============Headers parser end===========');
-    console.log('=============Body parser start===========');
-    console.log(req.body);
-    console.log('=============Body parser end===========');
-    next();
-})
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use(index);
+
+// Headers parser
+/*
+ app.use(function(req, res, next){
+ console.log('=============Cookies parser start===========');
+ console.log(req.cookies);
+ console.log('=============Cookies parser end===========');
+ console.log('=============Headers parser start===========');
+ console.log(req.headers);
+ console.log('=============Headers parser end===========');
+ console.log('=============Body parser start===========');
+ console.log(req.body);
+ console.log('=============Body parser end===========');
+ next();
+ })
+ */
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
