@@ -32,7 +32,7 @@ export default class UserService {
 
     static upload(files) {
         return new Promise((resolve, reject) => {
-            console.log('upload file name is' + files);
+            console.log('upload file name is' + files.file);
             let params = {
                 Bucket:'futsal-manager',
                 Key:files.file.name,
