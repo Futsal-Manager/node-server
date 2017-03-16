@@ -41,15 +41,21 @@ export default class ImageEditService {
                 .on('progress', function(progress) {
                     console.log('Processing: ' + progress.percent + '% done');
                 })
-                .on('error', function(err) {
+                .on('error', function(err, stdout, stderr) {
                     console.log('An error occurred: ' + err.message);
+                    console.log("ffmpeg stdout:\n" + stdout);
+                    console.log("ffmpeg stderr:\n" + stderr);
                     reject(err.message);
                 })
                 .on('end', function() {
                     console.log('An Merging success');
                     resolve({path: outputPath, name: name});
                 })
+                .outputOptions('-strict -2') // Todo: this way disable experimental codecs. need to be solved another way.
                 .save(outputPath);
+            /**
+             * Todo: reference: http://stackoverflow.com/questions/32931685/the-encoder-aac-is-experimental-but-experimental-codecs-are-not-enabled
+             */
         })
     };
 }
