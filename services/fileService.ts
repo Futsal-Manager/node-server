@@ -8,20 +8,22 @@
 var AWS = require('aws-sdk');
 var fs = require('fs');
 import formidable = require('formidable');
-
-let form = new formidable.IncomingForm();
-form.encoding = 'utf-8';
-form.uploadDir = __dirname +'/../uploadedFiles/';
-form.keepExtensions = true;
-form.maxFieldsSize = 2 * 1024 * 1024; //default;
-form.maxFields = 1000;
+import VIDEO_CONFIG from './../videoConfig';
 
 /** Internal dependencies **/
 import CONFIG from './../config';
 import {FileModel} from './dbModel';
 
+/** Form Parser CONFIGURATION **/
+let form = new formidable.IncomingForm();
+form.encoding = 'utf-8';
+form.uploadDir =  VIDEO_CONFIG.UPLOADED_DIR;
+form.keepExtensions = true;
+form.maxFieldsSize = 2 * 1024 * 1024; //default;
+form.maxFields = 1000;
 
-/** CONFIGURATION ***/
+
+/** AWS CONFIGURATION ***/
 AWS.config.region = CONFIG.AWS_REGION;
 let s3 = new AWS.S3();
 
@@ -30,14 +32,14 @@ export default class UserService {
 
     }
 
-    static upload(files) {
+    static upload(file) {
         return new Promise((resolve, reject) => {
-            console.log('upload file name is' + JSON.stringify(files));
+            // console.log('upload file name is' + JSON.stringify(files));
             let params = {
                 Bucket:'futsal-manager',
-                Key:files.file.name,
+                Key:file.name,
                 ACL:'public-read',
-                Body: require('fs').createReadStream(files.file.path)
+                Body: require('fs').createReadStream(file.path)
             };
             s3.upload(params, function(err, data){
                 var result='';
@@ -65,6 +67,10 @@ export default class UserService {
                     reject(err);
                     return;
                 } else{
+                    console.log('--parsed file is--');
+                    console.log(fields);
+                    console.log(files);
+                    console.log('--parsed file is--');
                     resolve(files);
                 }
             });

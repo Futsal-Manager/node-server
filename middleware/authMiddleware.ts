@@ -13,8 +13,6 @@ export default class AuthMiddleware {
         if (req.user) {
             next();
         } else {
-            console.log('req', req);
-            console.log('res', res);
             console.log('Auth Failed');
             AuthRouter.fail(req,res);
         }

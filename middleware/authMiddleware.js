@@ -11,8 +11,6 @@ class AuthMiddleware {
             next();
         }
         else {
-            console.log('req', req);
-            console.log('res', res);
             console.log('Auth Failed');
             authRouter_1.default.fail(req, res);
         }
