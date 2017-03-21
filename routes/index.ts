@@ -36,6 +36,7 @@ router.get('/auth/success', AuthRouter.success); // Don't need to. because this 
 router.get('/auth/fail', AuthRouter.fail);
 router.post('/auth/login', // local auth router
     passport.authenticate('local'), AuthMiddleware.userAuthenticated, AuthRouter.success);
+router.get('/auth/logout', AuthMiddleware.userAuthenticated, AuthRouter.logout)
 
 /******************************************************************************************
  * Facebook Auth Logic

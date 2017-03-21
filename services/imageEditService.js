@@ -45,7 +45,6 @@ class ImageEditService {
                 console.log('An Merging success');
                 resolve({ path: outputPath, name: name });
             })
-                .outputOptions('-strict -2') // Todo: this way disable experimental codecs. need to be solved another way.
                 .save(outputPath);
             /**
              * Todo: reference: http://stackoverflow.com/questions/32931685/the-encoder-aac-is-experimental-but-experimental-codecs-are-not-enabled

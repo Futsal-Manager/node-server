@@ -31,6 +31,20 @@ class ImageController {
             // Todo: For now startTime and durationTime is hard coded. Need to set up paramerize.
             let startTime = '0:30';
             let durationTime = '2:00';
+            /*
+             let a = {
+             time: [
+             {
+             startTime: '0:30',
+             durationTime: '0:20'
+             },
+             {
+             startTime: '0:50',
+             durationTime: '0:20'
+             }
+             ]
+             }
+             */
             let trimedVideo = imageEditService_1.default.trimVideo(ffmpegVideo, startTime, durationTime);
             let outputName = Date() + '.mp4';
             let outputPath = videoConfig_1.default.OUTPUT_DIR + outputName; // 'futsal-server/processedFiles/'

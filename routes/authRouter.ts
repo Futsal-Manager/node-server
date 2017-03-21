@@ -22,6 +22,11 @@ export default class AuthRouter {
     }
 
     static fail(req, res) {
-        res.status(200).json({msg: 'fail login'});
+        res.status(200).json({msg: 'You are not logged in status'});
+    }
+
+    static logout(req, res) {
+        req.logout();
+        res.status(200).json({msg: 'logout success'});
     }
 };
