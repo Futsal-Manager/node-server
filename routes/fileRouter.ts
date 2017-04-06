@@ -23,11 +23,11 @@ export default class FileRouter {
             // 업로드된 파일을 프로세싱해야함.
             return Promise.resolve(files);
             // Todo 비디오 파일 포맷인지 검증하는 작업이 필요
-        }).then((files) => { // 2. highlight extract
+        })/*.then((files) => { // 2. highlight extract
             console.log('=========Parsing form success=====');
             console.log(files);
             return ImageController.extractHighlight(files['file']['path']);
-        }).then((files) => { // 3. upload image to s3
+        })*/.then((files) => { // 3. upload image to s3
             console.log('=========Highlight extract success=====');
             return FileController.upload(files);
         }).then((s3url) => { // 4. save url and userInfo to mongoDB

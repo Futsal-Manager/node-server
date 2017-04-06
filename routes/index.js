@@ -31,6 +31,7 @@ router.get('/auth/success', authRouter_1.default.success); // Don't need to. bec
 router.get('/auth/fail', authRouter_1.default.fail);
 router.post('/auth/login', // local auth router
 passport.authenticate('local'), authMiddleware_1.default.userAuthenticated, authRouter_1.default.success);
+router.get('/auth/logout', authMiddleware_1.default.userAuthenticated, authRouter_1.default.logout);
 /******************************************************************************************
  * Facebook Auth Logic
  ******************************************************************************************/

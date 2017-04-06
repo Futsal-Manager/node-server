@@ -17,7 +17,11 @@ class AuthRouter {
         res.status(200).json({ msg: 'success login', reqHeaders: req.headers, cookies: req.cookies });
     }
     static fail(req, res) {
-        res.status(200).json({ msg: 'fail login' });
+        res.status(200).json({ msg: 'You are not logged in status' });
+    }
+    static logout(req, res) {
+        req.logout();
+        res.status(200).json({ msg: 'logout success' });
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });

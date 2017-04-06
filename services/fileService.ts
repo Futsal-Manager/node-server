@@ -71,7 +71,7 @@ export default class UserService {
                     console.log(fields);
                     console.log(files);
                     console.log('--parsed file is--');
-                    resolve(files);
+                    resolve(files['file']); // for highlight, use resolve(files)
                 }
             });
         })
