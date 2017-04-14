@@ -5,8 +5,10 @@
  **/
 "use strict";
 /** External dependencies **/
+let request = require('request');
 /** Internal dependencies **/
 const fileController_1 = require("./../controller/fileController");
+const config_1 = require("./../config");
 class FileRouter {
     constructor() {
     }
@@ -31,6 +33,24 @@ class FileRouter {
             return fileController_1.default.s3URLsave(req, s3url);
         }).then((url) => {
             console.log('=========Server save s3url to mongo success');
+            let options = {
+                uri: config_1.default.IMAGE_PROCESSING_API + '/video/',
+                method: 'POST',
+                json: {
+                    s3Url: url,
+                    email: req.user.username,
+                    ballColor: "#FFFFFF",
+                    token: config_1.default.PROTOCOL_TOKEN
+                }
+            };
+            request(options, (err, res, body) => {
+                if (!err && res.statusCode == 200) {
+                    console.log(body); // Print the shortened url.
+                }
+                else if (err) {
+                    console.log(err);
+                }
+            });
             res.status(200).json({ s3url: url });
         }).catch((err) => {
             res.status(500).json({ res: err });

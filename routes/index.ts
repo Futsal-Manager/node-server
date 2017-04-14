@@ -14,6 +14,7 @@ import MainRouter from './mainRouter';
 import AuthRouter from './authRouter';
 import AuthMiddleware from './../middleware/authMiddleware';
 import FileRouter from './fileRouter';
+import MailRouter from './mailRouter';
 
 let router = express.Router();
 
@@ -51,6 +52,11 @@ router.get('/auth/facebook/callback',
 router.get('/file/upload', AuthMiddleware.userAuthenticated, FileRouter.uploadPage);
 router.post('/file', AuthMiddleware.userAuthenticated, FileRouter.upload);
 router.get('/file', AuthMiddleware.userAuthenticated, FileRouter.list);
+
+/******************************************************************************************
+ * Mail Router
+ ******************************************************************************************/
+router.post('/mail/hook', MailRouter.send);
 
 
 export default router;

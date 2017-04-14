@@ -13,6 +13,7 @@ const mainRouter_1 = require("./mainRouter");
 const authRouter_1 = require("./authRouter");
 const authMiddleware_1 = require("./../middleware/authMiddleware");
 const fileRouter_1 = require("./fileRouter");
+const mailRouter_1 = require("./mailRouter");
 let router = express.Router();
 router.get('/', mainRouter_1.default.index);
 /******************************************************************************************
@@ -43,5 +44,9 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
 router.get('/file/upload', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.uploadPage);
 router.post('/file', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.upload);
 router.get('/file', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.list);
+/******************************************************************************************
+ * Mail Router
+ ******************************************************************************************/
+router.post('/mail/hook', mailRouter_1.default.send);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = router;
