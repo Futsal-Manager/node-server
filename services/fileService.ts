@@ -12,7 +12,7 @@ import VIDEO_CONFIG from './../videoConfig';
 
 /** Internal dependencies **/
 import CONFIG from './../config';
-import {FileModel} from './dbModel';
+import {UploadFileModel} from './dbModel';
 
 /** Form Parser CONFIGURATION **/
 let form = new formidable.IncomingForm();
@@ -79,7 +79,7 @@ export default class UserService {
 
     static save(username, s3url) {
         return new Promise((resolve, reject) => {
-            let fileInstance = new FileModel({username: username, s3url: s3url});
+            let fileInstance = new UploadFileModel({username: username, s3url: s3url});
             fileInstance.save().then(() => {
                 resolve(s3url);
             }).catch((err) => {
@@ -90,7 +90,7 @@ export default class UserService {
 
     static retrieveList(username) {
         return new Promise((resolve, reject) => {
-            FileModel.find({username: username}, {_id: false, username: false, __v: false}).then((files) => {
+            UploadFileModel.find({username: username}, {_id: false, username: false, __v: false}).then((files) => {
                 resolve(files);
             }).catch((err) => {
                 reject(err);

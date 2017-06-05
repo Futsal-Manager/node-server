@@ -20,11 +20,19 @@ let UserSchema = new mongoose_1.Schema({
     team: {
         type: String,
         required: true
-    },
-    age: Number,
-    data: [mongoose_1.Schema.Types.Mixed]
+    }
 });
-let FileSchema = new mongoose_1.Schema({
+let UploadedFileSchema = new mongoose_1.Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    s3url: {
+        type: String,
+        required: true,
+    }
+});
+let HighlightFileSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: true,
@@ -35,4 +43,5 @@ let FileSchema = new mongoose_1.Schema({
     },
 });
 exports.UserModel = mongoose_1.model('User', UserSchema);
-exports.FileModel = mongoose_1.model('File', FileSchema);
+exports.UploadFileModel = mongoose_1.model('UploadFile', UploadedFileSchema);
+exports.HighlightFileModel = mongoose_1.model('HighlightFile', HighlightFileSchema);

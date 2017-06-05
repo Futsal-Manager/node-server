@@ -70,7 +70,7 @@ class UserService {
     }
     static save(username, s3url) {
         return new Promise((resolve, reject) => {
-            let fileInstance = new dbModel_1.FileModel({ username: username, s3url: s3url });
+            let fileInstance = new dbModel_1.UploadFileModel({ username: username, s3url: s3url });
             fileInstance.save().then(() => {
                 resolve(s3url);
             }).catch((err) => {
@@ -80,7 +80,7 @@ class UserService {
     }
     static retrieveList(username) {
         return new Promise((resolve, reject) => {
-            dbModel_1.FileModel.find({ username: username }, { _id: false, username: false, __v: false }).then((files) => {
+            dbModel_1.UploadFileModel.find({ username: username }, { _id: false, username: false, __v: false }).then((files) => {
                 resolve(files);
             }).catch((err) => {
                 reject(err);

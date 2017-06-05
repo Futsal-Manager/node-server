@@ -31,7 +31,23 @@ interface IUser extends Document {
     team: string;
 }
 
-let FileSchema: Schema = new Schema({
+let UploadedFileSchema: Schema = new Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    s3url: {
+        type: String,
+        required: true,
+    }
+});
+
+interface IUploadFile extends Document {
+    username: string,
+    s3url: string,
+}
+
+let HighlightFileSchema: Schema = new Schema({
     username: {
         type: String,
         required: true,
@@ -40,17 +56,13 @@ let FileSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    thumbnailUrl: {
-        type: String,
-        required: true
-    }
 });
 
-interface IFile extends Document {
+interface IHighlightFile extends Document {
     username: string,
     s3url: string,
-    thumbnailUrl: string
 }
 
 export let UserModel: Model<IUser> = model<IUser>('User', UserSchema);
-export let FileModel: Model<IFile> = model<IFile>('File', FileSchema);
+export let UploadFileModel: Model<IUploadFile> = model<IUploadFile>('UploadFile', UploadedFileSchema);
+export let HighlightFileModel: Model<IHighlightFile> = model<IHighlightFile>('HighlightFile', HighlightFileSchema);
