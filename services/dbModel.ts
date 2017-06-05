@@ -22,18 +22,13 @@ let UserSchema: Schema = new Schema({
     team: {
         type: String,
         required: true
-    },
-    age: Number,
-    data: [Schema.Types.Mixed]
+    }
 });
 
 interface IUser extends Document {
     username: string;
     password: string;
     team: string;
-    age: number;
-    friends: string[];
-    data: any[];
 }
 
 let FileSchema: Schema = new Schema({
@@ -45,11 +40,16 @@ let FileSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    thumbnailUrl: {
+        type: String,
+        required: true
+    }
 });
 
 interface IFile extends Document {
     username: string,
-    s3url: string
+    s3url: string,
+    thumbnailUrl: string
 }
 
 export let UserModel: Model<IUser> = model<IUser>('User', UserSchema);
