@@ -46,6 +46,14 @@ export default class UserRouter {
         });
     }
 
+    static teamList(req, res) {
+        UserController.getTeamList(req).then((teams) => {
+            res.status(200).json({teams: teams});
+        }).catch((err) => {
+            res.status(500).json({errmsg: err.errmsg});
+        });
+    }
+
     static signupPage(req, res) {
         res.sendFile('signup.html', {root: __dirname +'/../public/html'});
     }

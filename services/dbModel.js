@@ -17,8 +17,11 @@ let UserSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    team: {
+        type: String,
+        required: true
+    },
     age: Number,
-    friends: [String],
     data: [mongoose_1.Schema.Types.Mixed]
 });
 let FileSchema = new mongoose_1.Schema({

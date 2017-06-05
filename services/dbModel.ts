@@ -19,14 +19,18 @@ let UserSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    team: {
+        type: String,
+        required: true
+    },
     age: Number,
-    friends: [String],
     data: [Schema.Types.Mixed]
 });
 
 interface IUser extends Document {
     username: string;
     password: string;
+    team: string;
     age: number;
     friends: string[];
     data: any[];

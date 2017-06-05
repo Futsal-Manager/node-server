@@ -13,7 +13,8 @@ class UserController {
     static createUser(req) {
         let username = req.body.username;
         let password = req.body.password;
-        return userService_1.default.createUser(username, password);
+        let team = req.body.team;
+        return userService_1.default.createUser(username, password, team);
     }
     static readUser(req) {
         let userID = req.params.id;
@@ -27,6 +28,9 @@ class UserController {
     static deleteUser(req) {
         let userID = req.params.id;
         return userService_1.default.deleteUser(userID);
+    }
+    static getTeamList(req) {
+        return userService_1.default.getTeamList();
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });

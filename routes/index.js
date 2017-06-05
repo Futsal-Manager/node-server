@@ -24,6 +24,7 @@ router.post('/auth/signup', userRouter_1.default.create);
 router.get('/user/:id', authMiddleware_1.default.userAuthenticated, userRouter_1.default.read); // Todo: Only dev test
 router.put('/user/:id', authMiddleware_1.default.userAuthenticated, userRouter_1.default.update);
 router.delete('/user/:id', authMiddleware_1.default.userAuthenticated, userRouter_1.default.delete); // Todo: Only dev test
+router.get('/teams', userRouter_1.default.teamList);
 /******************************************************************************************
  * Local Strategy Auth Logic
  ******************************************************************************************/

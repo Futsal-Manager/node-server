@@ -16,10 +16,10 @@ export default class UserService {
 
     }
 
-    static createUser(username, password) {
+    static createUser(username, password, team) {
         return new Promise((resolve, reject) => {
             this._encryptPassword(password).then((hashedPassword) => {
-                let user = new UserModel({username: username, password: hashedPassword});
+                let user = new UserModel({username: username, password: hashedPassword, team: team});
                 user.save().then(() => {
                     resolve();
                 }).catch((err) => {
@@ -55,5 +55,9 @@ export default class UserService {
                 resolve(res);
             });
         });
+    }
+
+    static getTeamList() {
+        return UserModel.distinct('team');
     }
 }

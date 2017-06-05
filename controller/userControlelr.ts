@@ -18,7 +18,9 @@ export default class UserController {
     static createUser(req) {
         let username = req.body.username;
         let password = req.body.password;
-        return UserService.createUser(username, password);
+        let team = req.body.team;
+
+        return UserService.createUser(username, password, team);
     }
 
     static readUser(req) {
@@ -35,6 +37,10 @@ export default class UserController {
     static deleteUser(req) {
         let userID = req.params.id;
         return UserService.deleteUser(userID);
+    }
+
+    static getTeamList(req) {
+        return UserService.getTeamList();
     }
 
 }

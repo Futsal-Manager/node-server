@@ -12,10 +12,10 @@ const config_1 = require("./../config");
 class UserService {
     constructor() {
     }
-    static createUser(username, password) {
+    static createUser(username, password, team) {
         return new Promise((resolve, reject) => {
             this._encryptPassword(password).then((hashedPassword) => {
-                let user = new dbModel_1.UserModel({ username: username, password: hashedPassword });
+                let user = new dbModel_1.UserModel({ username: username, password: hashedPassword, team: team });
                 user.save().then(() => {
                     resolve();
                 }).catch((err) => {
@@ -46,6 +46,9 @@ class UserService {
                 resolve(res);
             });
         });
+    }
+    static getTeamList() {
+        return dbModel_1.UserModel.distinct('team');
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
