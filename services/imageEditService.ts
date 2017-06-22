@@ -144,7 +144,7 @@ function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
 
         let outputFFmpeg =
             ffmpeg(originalVideoPath)
-                .videoCodec('libx264')
+                // .videoCodec('libx264') // 화질에 영향이 있음
                 .seekInput(skipTime);
 
         // split video with time and duration.
