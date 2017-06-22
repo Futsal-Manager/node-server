@@ -16,7 +16,7 @@ $('#upload-input').on('change', function(){
         formData.append('file', file, file.name);
 
         $.ajax({
-            url: '/file',
+            url: 'http://ec2-52-78-237-85.ap-northeast-2.compute.amazonaws.com/file',
             type: 'POST',
             data: formData,
             processData: false,

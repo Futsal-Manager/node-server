@@ -5,11 +5,12 @@
 
 const LOCAL_IMAGE_PROCESSING_API = 'http://localhost:8000';
 const REMOTE_IMAGE_PROCESSING_API = 'http://ec2-52-78-155-90.ap-northeast-2.compute.amazonaws.com';
+export const AWS_NODE_SERVER_API = 'http://ec2-52-78-237-85.ap-northeast-2.compute.amazonaws.com';
 
-const REMOTE_MODE:string = 'REMOTE';
-const LOCAL_MODE:string = 'LOCAL';
+export const REMOTE_MODE:string = 'REMOTE';
+export const LOCAL_MODE:string = 'LOCAL';
 
-const NOWMODE = REMOTE_MODE;
+export const NOWMODE = REMOTE_MODE;
 
 const CONFIG = {
   BCRYPT_SALT_ROUNDS: 10,
