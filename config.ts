@@ -10,7 +10,7 @@ export const AWS_NODE_SERVER_API = 'http://ec2-52-79-77-112.ap-northeast-2.compu
 export const REMOTE_MODE:string = 'REMOTE';
 export const LOCAL_MODE:string = 'LOCAL';
 
-export const NOWMODE = REMOTE_MODE;
+export const NOWMODE = LOCAL_MODE;
 
 const CONFIG = {
   BCRYPT_SALT_ROUNDS: 10,

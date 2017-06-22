@@ -100,10 +100,10 @@ export default class ImageEditService {
             }).then(() => {
                 // Progress 5. Input Music
                 return inputMusic(mergedPath, selectedMusic, outputPath, totalDurationSec);
-            }).then((musicVideo) => {
+            })/*.then((musicVideo) => {
                 shouldRemoveFileList.push(musicVideo);
                 return drawText(musicVideo)
-            }).then((textVideo) => {
+            })*/.then((textVideo) => {
                 resolve(textVideo);
                 _removeFiles(shouldRemoveFileList);
             }).catch((err) => {
