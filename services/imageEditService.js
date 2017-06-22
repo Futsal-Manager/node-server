@@ -114,12 +114,14 @@ exports.default = ImageEditService;
  * @returns {*}
  */
 function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
+    console.log('split started');
     return new Promise((resolve, reject) => {
         let fileNameArr = [];
         // File name is randomstring + file Index + '.mp4'
         timeArr.forEach((key, index) => {
             fileNameArr.push(randomstring.generate(1) + 'split' + index + '.mp4');
         });
+        console.log('fileNameArr split is', fileNameArr);
         let outputFFmpeg = ffmpeg(originalVideoPath)
             .videoCodec('libx265')
             .seekInput(skipTime);

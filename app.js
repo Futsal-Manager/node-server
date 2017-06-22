@@ -12,6 +12,7 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
+let cors = require('cors');
 /** Mongoose Config **/
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/futsalmanager');
@@ -87,6 +88,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
+app.use(cors());
 app.use(cookieParser(config_1.default.SESSION_SECRET_KEY));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

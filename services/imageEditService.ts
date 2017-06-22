@@ -132,6 +132,7 @@ export default class ImageEditService {
  * @returns {*}
  */
 function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
+    console.log('split started');
     return new Promise((resolve, reject) => {
         let fileNameArr = [];
 
@@ -139,6 +140,7 @@ function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
         timeArr.forEach((key, index) => {
             fileNameArr.push(randomstring.generate(1) + 'split' + index + '.mp4')
         });
+        console.log('fileNameArr split is', fileNameArr);
 
         let outputFFmpeg =
             ffmpeg(originalVideoPath)
