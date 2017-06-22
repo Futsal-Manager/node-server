@@ -144,7 +144,7 @@ function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
 
         let outputFFmpeg =
             ffmpeg(originalVideoPath)
-                .videoCodec('libx265')
+                .videoCodec('libx264')
                 .seekInput(skipTime);
 
         // split video with time and duration.
