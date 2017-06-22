@@ -108,7 +108,7 @@ export default class ImageEditService {
                 _removeFiles(shouldRemoveFileList);
             }).catch((err) => {
                 reject(err);
-                // _removeFiles(shouldRemoveFileList);
+                _removeFiles(shouldRemoveFileList);
             });
         });
     }
