@@ -41,6 +41,8 @@ export default class EditController {
             }).then((s3url) => {
                 console.log('saveHighlightToDb success');
                 resolve(s3url);
+            }).catch((err) => {
+                console.log('ffmpeg err', err);
             });
         });
     }

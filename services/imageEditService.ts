@@ -108,6 +108,7 @@ export default class ImageEditService {
                 _removeFiles(shouldRemoveFileList);
             }).catch((err) => {
                 reject(err);
+                console.log(err);
                 _removeFiles(shouldRemoveFileList);
             });
         });
@@ -349,7 +350,7 @@ function _addOnEndEvent(_ffmpeg, processingType, resolve, resolvePath) {
  */
 function _addOnErrorEvent(_ffmpeg, reject) {
     return _ffmpeg.on('error', function(err) {
-        console.log('error occurred' + err.message);
+        console.log('error occurred' + err);
         reject(err);
     })
 }
