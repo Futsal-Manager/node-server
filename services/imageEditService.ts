@@ -323,7 +323,7 @@ function _addDurationOutput(_ffmpeg, _fileName, _startAt, _duration) {
  */
 function _addOnProgress(_ffmpeg) {
     return _ffmpeg.on('progress', function(progress) {
-        // console.log('Processing: ' + progress.percent + '% done');
+        console.log('Processing: ' + progress.percent + '% done');
     })
 }
 
