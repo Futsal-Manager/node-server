@@ -13,6 +13,7 @@ const mainRouter_1 = require("./mainRouter");
 const authRouter_1 = require("./authRouter");
 const authMiddleware_1 = require("./../middleware/authMiddleware");
 const fileRouter_1 = require("./fileRouter");
+const editRouter_1 = require("./editRouter");
 const mailRouter_1 = require("./mailRouter");
 let router = express.Router();
 router.get('/', mainRouter_1.default.index);
@@ -43,8 +44,13 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
  * File Upload and Read Logic
  ******************************************************************************************/
 router.get('/file/upload', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.uploadPage);
-router.post('/file', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.upload);
+router.post('/file', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.uploadVideo);
 router.get('/file', authMiddleware_1.default.userAuthenticated, fileRouter_1.default.list);
+/******************************************************************************************
+ * Video Editing Logic (Split, Merge, Muxing)
+ ******************************************************************************************/
+router.post('/highlight/edit', authMiddleware_1.default.serverAuthenticated, editRouter_1.default.edit);
+router.get('/highlight', authMiddleware_1.default.userAuthenticated, editRouter_1.default.list);
 /******************************************************************************************
  * Mail Router
  ******************************************************************************************/

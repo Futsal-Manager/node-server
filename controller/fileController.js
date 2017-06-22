@@ -10,8 +10,8 @@ const fileService_1 = require("./../services/fileService");
 class FileController {
     constructor() {
     }
-    static upload(file) {
-        return fileService_1.default.upload(file);
+    static uploadVideo(file) {
+        return fileService_1.default.uploadVideo(file);
     }
     static parseForm(req) {
         return fileService_1.default.parse(req);

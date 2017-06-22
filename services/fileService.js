@@ -9,6 +9,7 @@ var AWS = require('aws-sdk');
 var fs = require('fs');
 const formidable = require("formidable");
 const videoConfig_1 = require("./../videoConfig");
+let request = require('request');
 /** Internal dependencies **/
 const config_1 = require("./../config");
 const dbModel_1 = require("./dbModel");
@@ -22,12 +23,12 @@ form.maxFields = 1000;
 /** AWS CONFIGURATION ***/
 AWS.config.region = config_1.default.AWS_REGION;
 let s3 = new AWS.S3();
-class UserService {
+class FileService {
     constructor() {
     }
-    static upload(file) {
+    static uploadVideo(file) {
+        console.log('upload to aws s3: ', file.path);
         return new Promise((resolve, reject) => {
-            // console.log('upload file name is' + JSON.stringify(files));
             let params = {
                 Bucket: 'futsal-manager',
                 Key: file.name,
@@ -42,6 +43,7 @@ class UserService {
                 }
                 else
                     result = data.Location;
+                console.log('original file upload to s3 result ended');
                 resolve(result);
             });
         });
@@ -87,6 +89,16 @@ class UserService {
             });
         });
     }
+    static downloadFileFromUrl(url, fileName, email) {
+        console.log(__dirname);
+        let downloadFileName = __dirname + fileName + '.mp4';
+        let fileStream = request(url).pipe(fs.createWriteStream(downloadFileName));
+        return new Promise((resolve, reject) => {
+            fileStream.on('finish', () => {
+                resolve(downloadFileName);
+            });
+        });
+    }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = UserService;
+exports.default = FileService;

@@ -15,8 +15,8 @@ export default class FileController {
 
     }
 
-    static upload(file) {
-        return FileService.upload(file);
+    static uploadVideo(file) {
+        return FileService.uploadVideo(file);
     }
 
     static parseForm(req) {

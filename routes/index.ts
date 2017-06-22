@@ -14,6 +14,7 @@ import MainRouter from './mainRouter';
 import AuthRouter from './authRouter';
 import AuthMiddleware from './../middleware/authMiddleware';
 import FileRouter from './fileRouter';
+import EditRouter from './editRouter';
 import MailRouter from './mailRouter';
 
 let router = express.Router();
@@ -51,8 +52,14 @@ router.get('/auth/facebook/callback',
  * File Upload and Read Logic
  ******************************************************************************************/
 router.get('/file/upload', AuthMiddleware.userAuthenticated, FileRouter.uploadPage);
-router.post('/file', AuthMiddleware.userAuthenticated, FileRouter.upload);
+router.post('/file', AuthMiddleware.userAuthenticated, FileRouter.uploadVideo);
 router.get('/file', AuthMiddleware.userAuthenticated, FileRouter.list);
+
+/******************************************************************************************
+ * Video Editing Logic (Split, Merge, Muxing)
+ ******************************************************************************************/
+router.post('/highlight/edit', AuthMiddleware.serverAuthenticated, EditRouter.edit);
+router.get('/highlight', AuthMiddleware.userAuthenticated, EditRouter.list);
 
 /******************************************************************************************
  * Mail Router
