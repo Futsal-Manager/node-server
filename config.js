@@ -4,7 +4,7 @@
 "use strict";
 const LOCAL_IMAGE_PROCESSING_API = 'http://localhost:8000';
 const REMOTE_IMAGE_PROCESSING_API = 'http://ec2-52-78-155-90.ap-northeast-2.compute.amazonaws.com';
-exports.AWS_NODE_SERVER_API = 'http://ec2-52-78-237-85.ap-northeast-2.compute.amazonaws.com';
+exports.AWS_NODE_SERVER_API = 'http://ec2-52-79-77-112.ap-northeast-2.compute.amazonaws.com';
 exports.REMOTE_MODE = 'REMOTE';
 exports.LOCAL_MODE = 'LOCAL';
 exports.NOWMODE = exports.REMOTE_MODE;

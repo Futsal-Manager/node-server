@@ -82,15 +82,17 @@ class ImageEditService {
             }).then(() => {
                 // Progress 5. Input Music
                 return inputMusic(mergedPath, selectedMusic, outputPath, totalDurationSec);
-            }).then((musicVideo) => {
+            }) /*.then((musicVideo) => {
                 shouldRemoveFileList.push(musicVideo);
-                return drawText(musicVideo);
-            }).then((textVideo) => {
+                return drawText(musicVideo)
+            })*/
+                .then((textVideo) => {
                 resolve(textVideo);
                 _removeFiles(shouldRemoveFileList);
             }).catch((err) => {
                 reject(err);
-                // _removeFiles(shouldRemoveFileList);
+                console.log(err);
+                _removeFiles(shouldRemoveFileList);
             });
         });
     }
@@ -115,15 +117,16 @@ exports.default = ImageEditService;
  */
 function splitVideo(originalVideoPath, timeArr, skipTime = 0) {
     console.log('split started');
+    console.log('split originalVideoPath', originalVideoPath);
+    console.log('split timeArr', timeArr);
     return new Promise((resolve, reject) => {
         let fileNameArr = [];
         // File name is randomstring + file Index + '.mp4'
         timeArr.forEach((key, index) => {
-            fileNameArr.push(randomstring.generate(1) + 'split' + index + '.mp4');
+            fileNameArr.push(randomstring.generate(4) + 'split' + index + '.mp4');
         });
         console.log('fileNameArr split is', fileNameArr);
         let outputFFmpeg = ffmpeg(originalVideoPath)
-            .videoCodec('libx265')
             .seekInput(skipTime);
         // split video with time and duration.
         for (let i = 0; i < fileNameArr.length; i++) {
@@ -275,7 +278,7 @@ function _addDurationOutput(_ffmpeg, _fileName, _startAt, _duration) {
  */
 function _addOnProgress(_ffmpeg) {
     return _ffmpeg.on('progress', function (progress) {
-        // console.log('Processing: ' + progress.percent + '% done');
+        console.log('Processing: ' + progress.percent + '% done');
     });
 }
 /**
@@ -300,7 +303,7 @@ function _addOnEndEvent(_ffmpeg, processingType, resolve, resolvePath) {
  */
 function _addOnErrorEvent(_ffmpeg, reject) {
     return _ffmpeg.on('error', function (err) {
-        console.log('error occurred' + err.message);
+        console.log('error occurred' + err);
         reject(err);
     });
 }
